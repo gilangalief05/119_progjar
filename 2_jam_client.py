@@ -6,7 +6,7 @@ import threading
 
 def kirim_data(nama="kosong"):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_address = ('172.16.16.101', 8889)
+    server_address = ('172.16.16.101', 45000)
     logging.warning(f"opening socket {server_address}")
     sock.connect(server_address)
 
