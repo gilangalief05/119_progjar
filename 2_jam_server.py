@@ -18,8 +18,8 @@ class ProcessTheClient(threading.Thread):
                         if data == 'TIME\r\n':
                                 waktu = datetime.datetime.now()
                                 jam = waktu.strftime("%X")
-                                jam = 'JAM ' + jam
-                        self.connection.sendall(jam.encode())
+                                data = 'JAM ' + jam
+                        self.connection.sendall(data.encode())
                 self.connection.close()
 
 class Server(threading.Thread):
@@ -29,7 +29,7 @@ class Server(threading.Thread):
                 threading.Thread.__init__(self)
 
         def run(self):
-                self.my_socket.bind(('172.16.16.101',8889))
+                self.my_socket.bind(('172.16.16.101',45000))
                 self.my_socket.listen(1)
                 while True:
                         self.connection, self.client_address = self.my_socket.accept()
