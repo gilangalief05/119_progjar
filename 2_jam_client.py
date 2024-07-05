@@ -13,23 +13,21 @@ def kirim_data(nama="kosong"):
     while True:
         try:
             while True:
+                # Send data
                 message = input()
                 message = message + '\r\n'
+                if message == 'TIME\r\n' or message == 'QUIT\r\n':
+                    sock.sendall(message.encode())
+                    data = sock.recv(32).decode() + '\r\n'
+                    print(data)
                 if message == 'QUIT\r\n':
                     break
-                sock.sendall(message.encode())
-                data = sock.recv(32).decode() + '\r\n'
-                print(data)
         finally:
             logging.warning("closed")
-        return
+            sock.close()
+            break
 
 
 if __name__=='__main__':
-    threads = []
-    for i in range(1):
-        t = threading.Thread(target=kirim_data, args=(i,))
-        threads.append(t)
-
-    for thr in threads:
-        thr.start()
+    t = threading.Thread(target=kirim_data)
+    t.start()
