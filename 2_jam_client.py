@@ -4,7 +4,7 @@ import logging
 import threading
 
 
-def kirim_data(nama="kosong"):
+def kirim_data():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_address = ('172.16.16.101', 45000)
     logging.warning(f"opening socket {server_address}")
